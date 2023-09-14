@@ -7,14 +7,23 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => 'library',
+    'language' => 'ru',
+    'name' => 'Библиотека',
+    'defaultRoute' => 'book/index',
+    //'' => '',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'formatter' => [
+            'dateFormat' => 'php:d F Y'
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'my_super_secret_key',
+            'baseUrl' => ''
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -42,14 +51,17 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'page/<page:\d+>' => 'book/index',
+                '/' => 'book/index',
+                'book/<id:\d+>' => 'book/view',
+                'genre/<id:\d+>' => 'genre/view',
+                'author/<id:\d+>' => 'author/view',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
