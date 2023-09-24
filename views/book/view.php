@@ -2,22 +2,26 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
+//$this->title = 'My Yii Application';
 
-echo "<pre>";
-    echo "id: " . $book->id . "\n";
-    echo "name: " . $book->name . "\n";
-    echo "year: " . $book->year . "\n";
-    echo "genre_id: " . $book->genre_id . "\n";
-    echo "genre: " . $book->genre->name . "\n";
-    echo "genre link: " . \yii\helpers\Url::to(['genre/view', 'id' => $book->genre->id]) . "\n";
-    echo "author_id: " . $book->author_id . "\n";
-    echo "author: " . $book->author->name . "\n";
-    echo "author link: " . \yii\helpers\Url::to(['author/view', 'id' => $book->author->id]) . "\n";
-    echo "page_count: " . $book->page_count . "\n";
-    echo "description: " . $book->description . "\n";
-    echo "created_at: " . $book->created_at . "\n";
-    //echo "view link: " . \yii\helpers\Url::to(['book/view', 'id' => $book->id]) . "\n";
-    //echo "-------\n";
-echo "</pre>";
+$this->params['breadcrumbs'][] = ['label' => 'Книга', 'url' => ['/book']];
+
+$name = $book->name;
+$year = $book->year;
+$genre = $book->genre->name;
+$genreLink = \yii\helpers\Url::to(['genre/view', 'id' => $book->genre->id]);
+$author = $book->author->name;
+$authorLink = \yii\helpers\Url::to(['author/view', 'id' => $book->author->id]);
+$description = $book->description;
+$viewLink = \yii\helpers\Url::to(['book/view', 'id' => $book->id]);
+$created = Yii::$app->formatter->asDate($book->created_at);
+
+$this->title = $name;
 ?>
+
+<h3><?=$name ?></h3>
+<p><?=$year?> г.</p>
+<p>Автор: <a href="<?=$authorLink?>"><?=$author?></a></p>
+<p>Жанр: <a href="<?=$genreLink ?>"><?=$genre ?></a></p>
+<p><?=$book->description ?></p>
+<p>Добавлено: <?=$created?></p>

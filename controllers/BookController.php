@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use Yii;
 use yii\data\Pagination;
 use yii\web\Controller;
 use app\models\Book;
+use app\models\Genre;
+use app\forms\CreateForm;
 
 class BookController extends Controller
 {
@@ -19,7 +22,7 @@ class BookController extends Controller
         $query = Book::find()->with('genre', 'author');
         $pages = new Pagination([
             'totalCount' => $query->count(),
-            'pageSize' => 1,
+            'pageSize' => 2,
             'forcePageParam' => false,
             'pageSizeParam' => false
             ]);
@@ -44,13 +47,15 @@ class BookController extends Controller
 
     public function actionCreate()
     {
-        $book = new Book;
-        if ($book->load(Yii::$app->request->post()) && $book->save()) {
-            return $this->redirect(['view', 'id' => $book->id]);
-        } else {
-            return $this->render('create', [
-                'book' => $book,
-            ]);
+        $model = new CreateForm;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($book = $model->create()) {
+                return $this->redirect(['book/view', 'id' => $book->id]);
+            }
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 }

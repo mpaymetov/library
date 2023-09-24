@@ -1,0 +1,46 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "",
+  "author": "mpaymetov",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "editorconfig": "editorconfig-cli",
+    "stylelint": "stylelint \"css/**/*.scss\" --syntax scss",
+    "test": "npm run editorconfig && npm run stylelint",
+    "build": "gulp build",
+    "start": "gulp start"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "browser-sync": "^2.29.3",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.63.6",
+    "stylelint": "^15.10.3",
+    "stylelint-config-htmlacademy": "^2.0.4"
+  },
+  "browserslist": [
+    "last 2 version",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "editorconfig-cli": [
+    "*.json",
+    "*.js",
+    "*.html",
+    "js/**/*.js",
+    "img/**/*.svg",
+    "sass/**/*.scss"
+  ],
+  "engines": {
+    "node": "18.16.1"
+  }
+}
