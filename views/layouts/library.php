@@ -3,6 +3,8 @@
 use app\assets\AppAsset;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
+use yii\bootstrap5\Nav;
+use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
 ?>
@@ -19,18 +21,28 @@ AppAsset::register($this);
 </head>
 <body class="d-flex flex-column h-100">
     <?php $this->beginBody() ?>
-    
-    <header id="header">
-        <div class="container">
-            <div class="logo">
-                <a href="/">Библиотека</a>
+
+    <header id="header" class="header">
+        <div class="container header__container">
+            <div class="header__logo-block">
+                <a href="<?=Yii::$app->homeUrl?>"><?=Yii::$app->name?></a>
             </div>
             <nav class="navigation">
-                <ul>
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="/book">Книги</a></li>
-                    <li><a href="/author">Авторы</a></li>
-                    <li><a href="/genre">Жанры</a></li>
+                <ul class="navigation__block">
+                    <li class="navigation__item"><a href="/book" class="navigation__link">Книги</a></li>
+                    <li class="navigation__item"><a href="/author" class="navigation__link">Авторы</a></li>
+                    <li class="navigation__item"><a href="/genre" class="navigation__link">Жанры</a></li>
+                    <? if (Yii::$app->user->isGuest): ?>
+                        <li class="navigation__item"><a href="/login" class="navigation__link">Логин</a></li>
+                    <? else: ?>
+                        <li class="navigation__item">
+                            <?
+                            echo Html::beginForm(['/logout']);
+                            echo Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'nav-link btn btn-link logout']);
+                            echo Html::endForm();
+                            ?>
+                        </li>
+                    <? endif; ?>
                 </ul>
             </nav>
         </div>
@@ -41,17 +53,18 @@ AppAsset::register($this);
             <?php if (!empty($this->params['breadcrumbs'])): ?>
                 <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
             <?php endif ?>
+
             <?//= Alert::widget() ?>
+
             <?= $content ?>
         </div>
     </main>
     
-    <footer id="footer" class="mt-auto py-3 bg-light">
-        <div class="container">
-            <div class="row text-muted">
-                <div class="col-md-6 text-center text-md-start">&copy; MPaymetov <?= date('Y') ?></div>
-    
-            </div>
+    <footer id="footer" class="footer">
+        <div class="container footer__container">
+
+            <div class="">&copy; <?= date('Y') ?></div>
+
         </div>
     </footer>
     

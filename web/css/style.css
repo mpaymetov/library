@@ -349,10 +349,74 @@ input[type=radio].visually-hidden {
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1620px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 34px;
-  padding-right: 34px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.header__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navigation__block {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navigation__item {
+  padding-left: 30px;
+}
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb li {
+  padding: 0;
+  margin: 0;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+.pagination li {
+  margin: 0;
+  padding: 0 8px;
+}
+
+.book__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.book__card {
+  width: 25%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.footer__container {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

@@ -60,6 +60,8 @@ $config = [
                 'book/<id:\d+>' => 'book/view',
                 'genre/<id:\d+>' => 'genre/view',
                 'author/<id:\d+>' => 'author/view',
+                'login' => 'site/login',
+                'logout' => 'site/logout',
             ],
         ],
     ],

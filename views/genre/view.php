@@ -48,5 +48,3 @@ $books = $genre->getBooks()->all(); ?>
     </div> */ ?>
 
 </section>
-
-<?php echo "</pre>";

@@ -6,8 +6,7 @@ use Yii;
 use yii\data\Pagination;
 use yii\web\Controller;
 use app\models\Book;
-use app\models\Genre;
-use app\forms\CreateForm;
+use app\forms\BookForm;
 
 class BookController extends Controller
 {
@@ -18,11 +17,10 @@ class BookController extends Controller
      */
     public function actionIndex()
     {
-        //$books = Book::find()->all();
         $query = Book::find()->with('genre', 'author');
         $pages = new Pagination([
             'totalCount' => $query->count(),
-            'pageSize' => 2,
+            'pageSize' => 4,
             'forcePageParam' => false,
             'pageSizeParam' => false
             ]);
@@ -47,7 +45,7 @@ class BookController extends Controller
 
     public function actionCreate()
     {
-        $model = new CreateForm;
+        $model = new BookForm;
         if ($model->load(Yii::$app->request->post())) {
             if ($book = $model->create()) {
                 return $this->redirect(['book/view', 'id' => $book->id]);

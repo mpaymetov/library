@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 use app\models\Book;
 
-class CreateForm extends Model {
+class BookForm extends Model {
     public $name;
     public $year;
     public $genre;

@@ -4,14 +4,17 @@
 
 $this->title = 'Genres'; ?>
 
-<section>
-
-<? foreach ($genres as $genre): ?>
-<?php
-echo "<pre>";
-echo $genre->name;
-echo "</pre>";
-?>
-<? endforeach; ?>
-
+<section class="genre section">
+    <? // <div class="container"> ?>
+    <div class="genre__list">
+        <? foreach ($genres as $genre):
+            $name = $genre->name;
+            $link = \yii\helpers\Url::to(['genre/view', 'id' => $genre->id]);
+            ?>
+            <div class="genre__item">
+                <a class="genre__link" href="<?=$link?>"><?=$name?></a>
+            </div>
+        <? endforeach; ?>
+    </div>
+    <? // </div> ?>
 </section>

@@ -1,8 +1,5 @@
 <?php
-
 /** @var yii\web\View $this */
-
-//$this->title = 'My Yii Application';
 
 $this->params['breadcrumbs'][] = ['label' => 'Книга', 'url' => ['/book']];
 
@@ -19,9 +16,13 @@ $created = Yii::$app->formatter->asDate($book->created_at);
 $this->title = $name;
 ?>
 
-<h3><?=$name ?></h3>
-<p><?=$year?> г.</p>
-<p>Автор: <a href="<?=$authorLink?>"><?=$author?></a></p>
-<p>Жанр: <a href="<?=$genreLink ?>"><?=$genre ?></a></p>
-<p><?=$book->description ?></p>
-<p>Добавлено: <?=$created?></p>
+<section class="book section">
+    <? // <div class="container"> ?>
+    <h3><?=$name ?></h3>
+    <p><?=$year?> г.</p>
+    <p>Автор: <a href="<?=$authorLink?>"><?=$author?></a></p>
+    <p>Жанр: <a href="<?=$genreLink ?>"><?=$genre ?></a></p>
+    <p><?=$book->description ?></p>
+    <p>Добавлено: <?=$created?></p>
+    <? // </div> ?>
+</section>

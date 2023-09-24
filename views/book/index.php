@@ -2,14 +2,17 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application'; ?>
+$this->title = 'Библиотека'; ?>
 
-<div>
-    <a href="/book/create">Добавить книгу</a>
-</div>
 
-<section>
-    <div class="card">
+
+<section class="book section">
+    <? // <div class="container"> ?>
+    <div class="">
+        <a href="/book/create" class="">Добавить книгу</a>
+    </div>
+
+    <div class="book__list">
         <? foreach ($books as $book): ?>
             <?
             $name = $book->name;
@@ -23,7 +26,7 @@ $this->title = 'My Yii Application'; ?>
             $viewLink = \yii\helpers\Url::to(['book/view', 'id' => $book->id]);
             $created = Yii::$app->formatter->asDate($book->created_at);
             ?>
-            <div>
+            <div class="book__card">
                 <a href="<?=$viewLink?>"><h3><?=$name ?></h3></a>
                 <p><?=$year?> г.</p>
                 <p>Автор: <a href="<?=$authorLink?>"><?=$author?></a></p>
@@ -35,12 +38,10 @@ $this->title = 'My Yii Application'; ?>
         <? endforeach; ?>
     </div>
 
-    <div class="pagination">
-        <div class="nav-links">
+    <div class="">
         <?= \yii\widgets\LinkPager::widget([
             'pagination' => $pages
         ]) ?>
-        </div>
     </div>
-
+    <? // </div> ?>
 </section>
