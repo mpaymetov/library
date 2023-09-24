@@ -4,9 +4,9 @@
  */
 use yii\helpers\Html;
 
-$title = 'Добавить книгу';
+$title = 'Добавить жанр';
 $this->title = $title;
-$this->params['breadcrumbs'][] = ['label' => 'Книга', 'url' => ['/book']];
+$this->params['breadcrumbs'][] = ['label' => 'Жанр', 'url' => ['/book']];
 $this->params['breadcrumbs'][] = ['label' => $title];
 
 echo Html::beginTag('section', ['class' => 'book section']);

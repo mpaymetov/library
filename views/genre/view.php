@@ -7,6 +7,7 @@ $name = $genre->name;
 
 $this->title = $name;
 $this->params['breadcrumbs'][] = ['label' => 'Жанры', 'url' => ['/genre']];
+$this->params['breadcrumbs'][] = ['label' => $name];
 
 $books = $genre->getBooks()->all(); ?>
 

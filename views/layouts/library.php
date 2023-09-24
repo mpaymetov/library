@@ -3,8 +3,6 @@
 use app\assets\AppAsset;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
 ?>
@@ -38,7 +36,7 @@ AppAsset::register($this);
                         <li class="navigation__item">
                             <?
                             echo Html::beginForm(['/logout']);
-                            echo Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'nav-link btn btn-link logout']);
+                            echo Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'nav-link btn btn-link logout']);
                             echo Html::endForm();
                             ?>
                         </li>
@@ -54,17 +52,13 @@ AppAsset::register($this);
                 <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
             <?php endif ?>
 
-            <?//= Alert::widget() ?>
-
             <?= $content ?>
         </div>
     </main>
     
     <footer id="footer" class="footer">
         <div class="container footer__container">
-
             <div class="">&copy; <?= date('Y') ?></div>
-
         </div>
     </footer>
     

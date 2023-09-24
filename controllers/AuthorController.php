@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Author;
+use app\forms\AuthorForm;
 
 class AuthorController extends Controller
 {
@@ -30,6 +31,24 @@ class AuthorController extends Controller
 
         return $this->render('view', [
             'author' => $author
+        ]);
+    }
+
+    public function actionCreate()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['author/index']);
+        }
+
+        $model = new AuthorForm;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($author = $model->create()) {
+                return $this->redirect(['author/view', 'id' => $author->id]);
+            }
+        }
+
+        return $this->render('create', [
+            'model' => $model,
         ]);
     }
 }

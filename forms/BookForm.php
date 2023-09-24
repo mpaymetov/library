@@ -9,15 +9,17 @@ use app\models\Book;
 class BookForm extends Model {
     public $name;
     public $year;
-    public $genre;
-    public $author;
+    public $genre_id;
+    public $author_id;
     public $page_count;
     public $description;
 
     public function rules()
     {
         return [
-            [['name', 'year', 'genre', 'author', 'page_count', 'description'], 'required'],
+            [['name', 'year', 'genre_id', 'author_id', 'page_count', 'description'], 'required'],
+            [['year', 'page_count'], 'integer'],
+            [['name', 'author_id', 'description'], 'string'],
         ];
     }
 
@@ -30,8 +32,8 @@ class BookForm extends Model {
         $book = new Book();
         $book->name = $this->name;
         $book->year = $this->year;
-        $book->genre_id = 2;
-        $book->author_id = 2;
+        $book->genre_id = $this->genre_id;
+        $book->author_id = $this->author_id;
         $book->page_count = $this->page_count;
         $book->description = $this->description;
 

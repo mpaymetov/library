@@ -45,6 +45,10 @@ class BookController extends Controller
 
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['book/index']);
+        }
+
         $model = new BookForm;
         if ($model->load(Yii::$app->request->post())) {
             if ($book = $model->create()) {

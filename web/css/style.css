@@ -391,6 +391,15 @@ input[type=radio].visually-hidden {
   padding: 0;
   margin: 0;
 }
+.breadcrumb li:not(:last-child) {
+  padding-right: 30px;
+  position: relative;
+}
+.breadcrumb li:not(:last-child)::after {
+  content: ">";
+  position: absolute;
+  right: 10px;
+}
 
 .pagination {
   list-style: none;
@@ -402,6 +411,14 @@ input[type=radio].visually-hidden {
   padding: 0 8px;
 }
 
+.author__list {
+  margin-bottom: 20px;
+}
+
+.genre__list {
+  margin-bottom: 20px;
+}
+
 .book__list {
   display: flex;
   flex-direction: row;
@@ -409,11 +426,17 @@ input[type=radio].visually-hidden {
   align-items: flex-start;
   margin-left: -10px;
   margin-right: -10px;
+  flex-wrap: wrap;
 }
 .book__card {
   width: 25%;
   padding-left: 10px;
   padding-right: 10px;
+}
+@media (max-width: 1024px) {
+  .book__card {
+    width: 50%;
+  }
 }
 
 .footer__container {

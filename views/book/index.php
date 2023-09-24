@@ -8,9 +8,12 @@ $this->title = 'Библиотека'; ?>
 
 <section class="book section">
     <? // <div class="container"> ?>
-    <div class="">
-        <a href="/book/create" class="">Добавить книгу</a>
-    </div>
+
+    <? if (Yii::$app->user->identity): ?>
+        <div class="">
+            <a href="/book/create" class="">Добавить книгу</a>
+        </div>
+    <? endif; ?>
 
     <div class="book__list">
         <? foreach ($books as $book): ?>
