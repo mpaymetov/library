@@ -42,5 +42,6 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 
+uploads
 node_modules
 package-lock.json

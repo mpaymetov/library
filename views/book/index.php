@@ -20,6 +20,7 @@ $this->title = 'Библиотека'; ?>
             <?
             $name = $book->name;
             $year = $book->year;
+            $imageUrl = $book->image ?: "uploads/book-no-image.jpg";
             $genre = $book->genre->name;
             $genreLink = \yii\helpers\Url::to(['genre/view', 'id' => $book->genre->id]);
             $author = $book->author->name;
@@ -31,12 +32,15 @@ $this->title = 'Библиотека'; ?>
             ?>
             <div class="book__card">
                 <a href="<?=$viewLink?>"><h3><?=$name ?></h3></a>
-                <p><?=$year?> г.</p>
-                <p>Автор: <a href="<?=$authorLink?>"><?=$author?></a></p>
-                <p>Жанр: <a href="<?=$genreLink ?>"><?=$genre ?></a></p>
-                <p>Страниц: <?=$pageCount?></p>
-                <p><?=$book->description ?></p>
-                <p>Добавлено: <?=$created?></p>
+                <img src="<?=$imageUrl ?>" alt="">
+                <div class="">
+                    <p><?=$year?> г.</p>
+                    <p>Автор: <a href="<?=$authorLink?>"><?=$author?></a></p>
+                    <p>Жанр: <a href="<?=$genreLink ?>"><?=$genre ?></a></p>
+                    <p>Страниц: <?=$pageCount?></p>
+                    <p><?=$book->description ?></p>
+                    <p>Добавлено: <?=$created?></p>
+                </div>
             </div>
         <? endforeach; ?>
     </div>
