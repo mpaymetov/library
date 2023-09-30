@@ -15,6 +15,13 @@ $this->title = 'Библиотека'; ?>
         </div>
     <? endif; ?>
 
+    <div class="book__sort">
+        <?
+        // Отображение ссылок на различные действия сортировок
+        echo 'Сортировать: ' . $sort->link('name') . ' | ' . $sort->link('year') . ' | ' . $sort->link('genre_id') . ' | ' . $sort->link('author_id');
+        ?>
+    </div>
+
     <div class="book__list">
         <? foreach ($books as $book): ?>
             <?

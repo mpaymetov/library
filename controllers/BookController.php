@@ -8,6 +8,7 @@ use yii\web\Controller;
 use app\models\Book;
 use app\forms\BookForm;
 use yii\web\NotFoundHttpException;
+use yii\data\Sort;
 
 class BookController extends Controller
 {
@@ -18,6 +19,20 @@ class BookController extends Controller
      */
     public function actionIndex()
     {
+        $sort = new Sort([
+            'attributes' => [
+                'year',
+                'genre_id',
+                'author_id',
+                'name' => [
+                    'asc' => ['name' => SORT_ASC],
+                    'desc' => ['name' => SORT_DESC],
+                    'default' => SORT_DESC,
+                    'label' => 'Name',
+                ],
+            ],
+        ]);
+
         $query = Book::find()->with('genre', 'author');
         $pages = new Pagination([
             'totalCount' => $query->count(),
@@ -25,10 +40,11 @@ class BookController extends Controller
             'forcePageParam' => false,
             'pageSizeParam' => false
             ]);
-        $books = $query->offset($pages->offset)->limit($pages->limit)->all();
+        $books = $query->orderBy($sort->orders)->offset($pages->offset)->limit($pages->limit)->all();
         return $this->render('index', [
             'books' => $books,
-            'pages' => $pages
+            'pages' => $pages,
+            'sort' => $sort,
         ]);
     }
 

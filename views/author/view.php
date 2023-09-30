@@ -21,7 +21,7 @@ $books = $author->getBooks()->all(); ?>
             $year = $book->year;
             $genre = $book->genre->name;
             $genreLink = \yii\helpers\Url::to(['genre/view', 'id' => $book->genre->id]);
-            $author = $book->author->name;
+            //$author = $book->author->name;
             //$authorLink = \yii\helpers\Url::to(['author/view', 'id' => $book->author->id]);
             $pageCount = $book->page_count;
             $description = $book->description;
@@ -31,7 +31,7 @@ $books = $author->getBooks()->all(); ?>
             <div class="author__book-item">
                 <a href="<?=$viewLink?>"><h3><?=$name ?></h3></a>
                 <p><?=$year?> г.</p>
-                <p>Автор: <?=$author?></p>
+                <? /* <p>Автор: <?=$author?></p> */ ?>
                 <p>Жанр: <a href="<?=$genreLink?>"><?=$genre ?></a></p>
                 <p>Страниц: <?=$pageCount?></p>
                 <p><?=$book->description ?></p>
