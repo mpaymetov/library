@@ -3,12 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use yii\data\Pagination;
 use yii\web\Controller;
 use app\models\Book;
 use app\forms\BookForm;
 use yii\web\NotFoundHttpException;
-use yii\data\Sort;
+use yii\data\SqlDataProvider;
 
 class BookController extends Controller
 {
@@ -19,32 +18,30 @@ class BookController extends Controller
      */
     public function actionIndex()
     {
-        $sort = new Sort([
+        $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM book')->queryScalar();
+        $sqlQuery = "SELECT book.*, genre.name AS genre_name, author.name AS author_name FROM book LEFT JOIN genre ON book.genre_id = genre.id LEFT JOIN author ON book.author_id = author.id";
+
+        $sort = [
             'attributes' => [
                 'year',
-                'genre_id',
-                'author_id',
-                'name' => [
-                    'asc' => ['name' => SORT_ASC],
-                    'desc' => ['name' => SORT_DESC],
-                    'default' => SORT_DESC,
-                    'label' => 'Name',
-                ],
+                'created_at',
+                'genre_name',
+                'author_name',
+                'name',
             ],
+        ];
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => $sqlQuery,
+            'totalCount' => $count,
+            'pagination' => [
+                'pageSize' => 4,
+            ],
+            'sort' => $sort,
         ]);
 
-        $query = Book::find()->with('genre', 'author');
-        $pages = new Pagination([
-            'totalCount' => $query->count(),
-            'pageSize' => 4,
-            'forcePageParam' => false,
-            'pageSizeParam' => false
-            ]);
-        $books = $query->orderBy($sort->orders)->offset($pages->offset)->limit($pages->limit)->all();
         return $this->render('index', [
-            'books' => $books,
-            'pages' => $pages,
-            'sort' => $sort,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
