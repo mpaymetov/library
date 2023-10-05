@@ -19,7 +19,7 @@ class BookController extends Controller
      */
     public function actionIndex()
     {
-        $query = Book::find()->with('genre', 'author');
+        $query = Book::find();
 
         $sort = [
             'attributes' => [

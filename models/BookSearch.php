@@ -19,7 +19,7 @@ class BookSearch extends Book
     {
         return [
             [['yearFrom', 'yearTo', 'pageFrom', 'pageTo', 'genre_id', 'author_id'], 'integer'],
-            [['name', 'genre', 'author'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 

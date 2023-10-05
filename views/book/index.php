@@ -29,7 +29,7 @@ $this->title = 'Библиотека'; ?>
             ],
             'year',
             [
-                'attribute' => 'genre.name',
+                'attribute' => 'genre',
                 'label' => 'Жанр',
                 'format' => 'html',
                 'value' => function ($data) {
