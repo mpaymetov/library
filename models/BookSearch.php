@@ -18,7 +18,7 @@ class BookSearch extends Book
     public function rules()
     {
         return [
-            [['yearFrom', 'yearTo', 'pageFrom', 'pageTo'], 'integer'],
+            [['yearFrom', 'yearTo', 'pageFrom', 'pageTo', 'genre_id', 'author_id'], 'integer'],
             [['name', 'genre', 'author'], 'safe'],
         ];
     }
@@ -56,27 +56,9 @@ class BookSearch extends Book
             return $dataProvider;
         }
 
-        $genreId = null;
-        if ($this->genre) {
-            if ($genre = Genre::find()->where(['name' => $this->genre])->one()) {
-                $genreId = $genre->id;
-            } else {
-                $genreId = -1;
-            }
-        }
-
-        $authorId = null;
-        if ($this->author) {
-            if ($author = Author::find()->where(['name' => $this->author])->one()) {
-                $authorId = $author->id;
-            } else {
-                $authorId = -1;
-            }
-        }
-
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'genre_id', $genreId])
-            ->andFilterWhere(['like', 'author_id', $authorId])
+            ->andFilterWhere(['like', 'genre_id', $this->genre_id])
+            ->andFilterWhere(['like', 'author_id', $this->author_id])
             ->andFilterWhere(['>=', 'year', $this->yearFrom])
             ->andFilterWhere(['<=', 'year', $this->yearTo])
             ->andFilterWhere(['>=', 'page_count', $this->pageFrom])
