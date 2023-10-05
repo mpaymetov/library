@@ -12,6 +12,20 @@ class Book extends \yii\db\ActiveRecord
         return 'book';
     }
 
+    public function attributeLabels(){
+        return [
+            'id' => 'ID',
+            'name' => 'Name',
+            'year' => 'Publication year',
+            'genre_id' => 'Genre',
+            'author_id' => 'Author',
+            'page_count' => 'Pages Count',
+            'image' => 'Image of book',
+            'description' => 'Description',
+            'created_at' => 'Created datetime',
+        ];
+    }
+
     public function getGenre() {
         return $this->hasOne(Genre::class, ['id' => 'genre_id']);
     }

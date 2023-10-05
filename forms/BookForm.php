@@ -19,8 +19,8 @@ class BookForm extends Model {
     {
         return [
             [['name', 'year', 'genre_id', 'author_id', 'page_count', 'description'], 'required'],
-            [['year', 'page_count'], 'integer'],
-            [['name', 'author_id', 'description'], 'string'],
+            [['year', 'author_id', 'genre_id', 'page_count'], 'integer'],
+            [['name', 'description'], 'string'],
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }

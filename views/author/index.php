@@ -2,6 +2,8 @@
 
 /** @var yii\web\View $this */
 
+use \yii\helpers\Url;
+
 $title = 'Авторы';
 $this->title = $title;
 $this->params['breadcrumbs'][] = ['label' => $title];
@@ -13,7 +15,7 @@ $this->params['breadcrumbs'][] = ['label' => $title];
     <div class="author__list">
         <? foreach ($authors as $author):
             $name = $author->name;
-            $link = \yii\helpers\Url::to(['author/view', 'id' => $author->id]);
+            $link = Url::to(['author/view', 'id' => $author->id]);
             ?>
             <div class="author__item">
                 <a href="<?=$link?>" class="author__link"><?=$name?></a>

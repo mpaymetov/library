@@ -3,11 +3,12 @@
 namespace app\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use app\models\Book;
-use app\forms\BookForm;
 use yii\web\NotFoundHttpException;
-use yii\data\SqlDataProvider;
+use app\models\Book;
+use app\models\BookSearch;
+use app\forms\BookForm;
 
 class BookController extends Controller
 {
@@ -18,30 +19,36 @@ class BookController extends Controller
      */
     public function actionIndex()
     {
-        $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM book')->queryScalar();
-        $sqlQuery = "SELECT book.*, genre.name AS genre_name, author.name AS author_name FROM book LEFT JOIN genre ON book.genre_id = genre.id LEFT JOIN author ON book.author_id = author.id";
+        $query = Book::find()->with('genre', 'author');
 
         $sort = [
             'attributes' => [
-                'year',
-                'created_at',
-                'genre_name',
-                'author_name',
+                'id',
                 'name',
+                'year',
+                'page_count',
+                'created_at',
             ],
         ];
 
-        $dataProvider = new SqlDataProvider([
-            'sql' => $sqlQuery,
-            'totalCount' => $count,
-            'pagination' => [
-                'pageSize' => 4,
-            ],
+        $pagination = [
+            'pageSize' => 4,
+        ];
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
             'sort' => $sort,
+            'pagination' => $pagination,
         ]);
+
+        $searchModel = new BookSearch();
+        if (Yii::$app->request->get()) {
+            $dataProvider = $searchModel->search(Yii::$app->request->get());
+        }
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
